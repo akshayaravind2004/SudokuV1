@@ -6,7 +6,7 @@ def sudoku_grid_correct(x):
                 new.append(value)
         if len(new)==len(sudoku[row_no]):
             return True
-        else:
+        elif len(new)<len(sudoku[row_no]):
             return False
     def block_correct(sudoku, row_no, column_no):
         block=[]
@@ -30,14 +30,20 @@ def sudoku_grid_correct(x):
             return False
     for r in range (0,9):
         if row_correct(x, r)==False:
+            print('incorrect row')
             return False
     for c in range(0,9):
         if column_correct(x,c)==False:
+            print('incorrect column')
             return False
     for r in range (0,9,3):
         for c in range(0,9,3):
             if block_correct(x,r,c)==False:
+                print('incorrect block')
                 return False
+    print('New Grid:')
+    print_sudoku(x)
+    print()
     for i in x:
         for v in i:
             if v==0:
@@ -78,7 +84,6 @@ def print_sudoku(sudoku: list):
                 elif value>0:
                     print (value, end=' ')
 def add_number(sudoku,x,y,number):
-
     row=sudoku[x]
     row[y]=number
 def select_difficulty():
@@ -138,7 +143,6 @@ def play_game():
     print()
     print()
     sudoku  = select_difficulty()
-    print_sudoku(sudoku)
     print()
     while sudoku_grid_correct(sudoku)==False:
         print()
@@ -159,12 +163,7 @@ def play_game():
             break
         add_number(sudoku,x-1,y-1,number)
         print()
-        print('New Grid:')
-        print_sudoku(sudoku)
-        print()
-        print()
-    if sudoku_grid_correct(sudoku)==True:
+    if sudoku_grid_correct==True:
         print('Congratulations! You found the correct solution!')
-
-
 play_game()
+
